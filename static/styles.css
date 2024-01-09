@@ -2,24 +2,83 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #111;
 }
 
 header {
-    background-color: #333;
     padding: 10px;
-    color: white;
+    border: 1px #AA0000 solid;
+    border-radius: 5px;
 }
 
 nav a {
-    color: white;
+    color: #55DD33;
 }
 
 .nav-link:hover {
     font-weight: bold;
-    color: white;
+    color: #ADFF2F;
 }
 
 #navbar-logo:hover {
-    color: white;
+    color: #7CFC00;
 }
+
+#body {
+    margin-top: 20px;
+    color: #ADFF2F;
+}
+
+.column {
+    border: 1px #AA0000 solid;
+    border-radius: 5px;
+}
+
+.subtitle {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px #7CFC00 solid;
+}
+
+.social {
+    color: #fff;
+    margin-left: 20px;
+}
+
+.social-list {
+  list-style-type: none; /* Remove default list style */
+  padding: 0; /* Remove default padding */
+  color: #55DD33;
+}
+
+.social-list li:before {
+  content: "-";
+  margin-right: 5px; /* Add spacing between hyphen and list item content */
+}
+
+.social-list .social-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.social-list .social-link:before {
+    content: "";
+}
+
+.social-list .social-link:hover {
+    border: 1px #7CFC00 solid;
+    color: #7CFC00;
+}
+
+.social-list .social-link:hover a{
+    text-decoration: none;
+    color: #7CFC00;
+}
+
+.fa-youtube {
+    color: red;
+}
+.fa-twitch {
+    color: purple;
 }

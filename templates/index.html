@@ -6,13 +6,14 @@
     <title>Starcraft Fastest Build Orders</title>
     <!-- Add this to the head of your HTML file -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
 <header>
 	<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-  		<div class="container-fluid">
+  		<div class="container">
 			<a class="navbar-brand" id="navbar-logo" href="#">Starcraft Fastest Guide</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -21,19 +22,38 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item ml-auto">
-						<a class="nav-link active" aria-current="page" href="#">Protoss</a>
+						<a class="nav-link active" aria-current="page" href="#">1v1</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Terran</a>
+						<a class="nav-link" href="#">In-house</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Zerg</a>
+						<a class="nav-link" href="#">3v3</a>
 					</li>
 		    	</ul>
 			</div>
 		</div>
     </nav>
 </header>
+
+<div class="container" id="body">
+	<div class="row">
+		<div class="col-md-8 column mr-1">
+			<h2>About Me</h2>
+			<p>This is the main content of the first column.</p>
+		</div>
+
+		<div class="col-md-3 column ml-1">
+			<h3 class="subtitle">Channel</h3>
+			<ul class="social-list">
+				<li class="social-title">Youtube</li>
+				<li class="social-link"><a href="https://www.youtube.com/@cross_tv1" class="social"><i class="fab fa-youtube"></i> Cross_tv1</a></li>
+				<li class="social-title">Twitch</li>
+				<li class="social-link"><a href="https://www.twitch.tv/cross_tv1" class="social"><i class="fab fa-twitch"></i> Cross_tv1</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 
 <!-- Your page content goes here -->
 

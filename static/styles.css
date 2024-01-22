@@ -1,27 +1,48 @@
 /* styles.css */
+@font-face {
+  font-family: starcraft;
+  src: url("STARCRAFT NORMAL.TTF");
+}
+
+* {
+    color: #fff;
+    font-size: 18px !important;
+    font-family: starcraft;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #111;
+    background-color: #131313;
 }
 
 header {
-    padding: 10px;
-    border: 1px #AA0000 solid;
+    border: 1px #A00000 solid;
     border-radius: 5px;
 }
 
 nav a {
-    color: #55DD33;
+    color: #33FF00;
 }
 
 .nav-link:hover {
-    font-weight: bold;
-    color: #ADFF2F;
+    color: #99FF66;
 }
 
-#navbar-logo:hover {
-    color: #7CFC00;
+.nav-link {
+    border: 1px #A00000 solid;
+}
+
+.title {
+    text-align:center;
+    border: 2px #A00000 solid;
+    padding: 10px;
+}
+
+#title {
+    font-size: 48px;
+    color: #33FF00;
+    font-size: 2.5rem !important;
 }
 
 #body {
@@ -30,15 +51,16 @@ nav a {
 }
 
 .column {
-    border: 1px #AA0000 solid;
-    border-radius: 5px;
+    /*border: 1px #AA0000 solid;
+    border-radius: 5px;*/
 }
 
 .subtitle {
-    font-size: 18px;
+    font-size: 20px !important;
+    color: #99FF66;
     text-align: center;
-    padding: 10px 0 10px 0;
-    border-bottom: 1px #7CFC00 solid;
+    padding: 10px 0 20px 0;
+    border-bottom: 1px #99FF66 solid;
 }
 
 .social {
@@ -46,10 +68,16 @@ nav a {
     margin-left: 20px;
 }
 
+.social-title {
+    color: #33FF00;
+    font-size: 18px;
+}
+
 .social-list {
   list-style-type: none; /* Remove default list style */
   padding: 0; /* Remove default padding */
-  color: #55DD33;
+  color: #fff;
+  font-size: 18px;
 }
 
 .social-list li:before {
@@ -67,13 +95,13 @@ nav a {
 }
 
 .social-list .social-link:hover {
-    border: 1px #7CFC00 solid;
-    color: #7CFC00;
+    font-weight: bold;
+    border: 1px #99FF66 solid;
 }
 
 .social-list .social-link:hover a{
     text-decoration: none;
-    color: #7CFC00;
+    color: #99FF66;
 }
 
 .fa-youtube {
@@ -81,4 +109,20 @@ nav a {
 }
 .fa-twitch {
     color: purple;
+}
+
+.underline {
+    border-bottom: 1px  #424949 solid;
+    padding-bottom: 1px;
+}
+
+
+.content-maintitle { 
+    font-size: 20px !important;
+    color: #33FF00;
+    padding: 10px 0 10px 0;
+}
+
+.content-title {
+    color:  #FFFF33;
 }

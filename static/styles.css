@@ -1,19 +1,15 @@
 /* styles.css */
-@font-face {
-  font-family: starcraft;
-  src: url("STARCRAFT NORMAL.TTF");
-}
 
 * {
     color: #fff;
     font-size: 18px !important;
-    font-family: starcraft;
+    font-family: Helvetica;
 }
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #131313;
+    background-color: #000;
 }
 
 header {
@@ -27,6 +23,7 @@ nav a {
 
 .nav-link:hover {
     color: #99FF66;
+    font-weight: bold;
 }
 
 .nav-link {
@@ -47,12 +44,49 @@ nav a {
 
 #body {
     margin-top: 20px;
-    color: #ADFF2F;
 }
 
-.column {
-    /*border: 1px #AA0000 solid;
-    border-radius: 5px;*/
+.image-column img {
+    transition: filter 0.3s ease; /* Smooth transition for the filter effect */
+    filter: brightness(70%);
+
+}
+
+.image-column a {
+    text-decoration: none;
+}
+
+.image-column a:hover p {
+    font-weight: bold;
+    color: #99FF66;
+}
+
+.image-column {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    widht: 100%;
+    overflow: hidden;
+}
+
+.image-column:hover img {
+    filter: brightness(150%); /* Adjust brightness on hover */
+}
+
+.image-subtitle {
+    text-align: center;
+    color: #fff;
+}
+
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Adjust opacity for darkness */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
 }
 
 .subtitle {

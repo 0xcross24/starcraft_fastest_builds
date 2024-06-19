@@ -1,0 +1,21 @@
+#offcanvasNavbar {
+    width: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+  .nav-item a {
+    font-size: 30px;
+        color: #000;
+    }
+}
+
+.nav-item a:hover {
+    color: #eeeeee;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}

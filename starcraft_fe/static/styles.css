@@ -19,3 +19,13 @@
   margin-right: 20px;
   margin-bottom: 16px;
 }
+
+.build-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.column:hover .card {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Blue glow effect */
+  transition: box-shadow 0.3s ease;
+}

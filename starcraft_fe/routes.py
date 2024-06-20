@@ -103,12 +103,14 @@ def update_post(post_id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
+        post.subtitle = form.subtitle.data
         post.content = form.content.data
         db.session.commit()
         flash("Post has been updated!", "success")
         return redirect(url_for('post', post_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
+        form.subtitle.data = post.subtitle
         form.content.data = post.content
     return render_template('create.html', legend="Update Post", form=form)
 

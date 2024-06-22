@@ -2,21 +2,46 @@
 
 {% block content %}
 <div class="row">
-{% for post in posts %}
-  <div class="col-6 column mt-4">
-    <a href="{{ url_for('post', post_id=post.id) }}" class="build-link mt-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
-          <div class="d-flex">
-            <small class="me-2">{{ post.author.username }}</small>
-            <small class="card-text">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-          </div>
-          <p class="card-text">{{ post.subtitle }}</p>
+  <div class="Header">
+    <h1 class="page-title">Select Your Race</h1>
+  </div>
+
+<div class="col-4 column terran mt-4">
+  <div class="card hover-card" data-hover-image="marine.gif" data-default-image="marine.jpg" id="terran-hover">
+    <a href="{{ url_for('tag_posts', tag_name='Terran') }}" class="build-link mt-4">
+      <div class="card-body p-0">
+        <img src="{{ url_for('static', filename='marine.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="p-3">
+          <h1 class="card-text">Terran</h1>
         </div>
       </div>
     </a>
   </div>
-{% endfor %}
+</div>
+
+<div class="col-4 column protoss mt-4">
+  <div class="card hover-card" data-hover-image="zealot.gif" data-default-image="zealot.jpg" id="protoss-hover">
+    <a href="{{ url_for('tag_posts', tag_name='Protoss') }}" class="build-link mt-4">
+      <div class="card-body p-0">
+        <img src="{{ url_for('static', filename='zealot.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="p-3">
+          <h1 class="card-text">Protoss</h1>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="col-4 column zerg mt-4">
+  <div class="card hover-card" data-hover-image="hydra.gif" data-default-image="hydra.jpg" id="zerg-hover">
+    <a href="{{ url_for('tag_posts', tag_name='Zerg') }}" class="build-link mt-4">
+      <div class="card-body p-0">
+        <img src="{{ url_for('static', filename='hydra.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="p-3">
+          <h1 class="card-text">Zerg</h1>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 {% endblock %}

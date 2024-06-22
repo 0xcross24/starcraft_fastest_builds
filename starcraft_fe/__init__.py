@@ -3,6 +3,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_ckeditor import CKEditor
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -12,5 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///build.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+ckeditor = CKEditor(app)
+migrate = Migrate(app, db)
 
 from starcraft_fe import routes

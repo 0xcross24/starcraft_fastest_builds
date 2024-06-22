@@ -4,13 +4,12 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from starcraft_fe import app, db, bcrypt
 from starcraft_fe.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
-from starcraft_fe.models import User, Post
+from starcraft_fe.models import User, Post, Tag
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
 def index():
-    posts = Post.query.all()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -77,22 +76,56 @@ def account():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', image_file=image_file, form=form)
 
-@app.route("/post/new", methods=['GET', 'POST'])
+@app.route("/build/new", methods=['GET', 'POST'])
 @login_required
 def create_post():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, subtitle=form.subtitle.data, content=form.content.data, author=current_user)
         db.session.add(post)
+        if form.tags.data:
+            for tag_name in form.tags.data:
+                tag = db.session.query(Tag).filter_by(name=tag_name).first()
+                if tag is None:
+                    tag = Tag(name=tag_name)
+                    db.session.add(tag)
+                post.tags.append(tag)
+
         db.session.commit()
-        flash('Your post has been updated!', 'success')
+        flash('Your post has been created!', 'success')
         return redirect(url_for('index'))
+    else:
+        print(form.errors)  # Print out form validation errors
+        print(form.data)    # Print out form data to inspect
     return render_template('create.html', form=form, legend="New Post")
 
-@app.route("/post/<int:post_id>")
-def post(post_id):
-    post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+@app.route('/<string:tag_name>', endpoint='tag_posts')
+def posts_by_tag(tag_name):
+    tag = Tag.query.filter_by(name=tag_name).first_or_404() # tag = Terran because I'm in /Terran
+    posts = Post.query.filter(Post.tags.contains(tag)).all() # Queries Posts with Terran
+
+    levels = Post.tags.contains(tag)
+
+    beginner = []
+    intermediate = []
+    expert = []
+
+    for post in posts:
+        print(post.tags)
+        for tag in post.tags:
+            if tag.name == 'Expert':
+                expert.append(post.title)
+                expert.append(post.subtitle)
+                expert.append(post.author.username)
+            elif tag.name == "Intermediate":
+                intermediate.append(post.title)
+            elif tag.name == "Beginner":
+                beginner.append(post.title)
+
+    print(expert)
+
+    return render_template('builds.html', posts=posts, beginner=beginner, intermediate=intermediate, expert=expert)
+
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -105,6 +138,7 @@ def update_post(post_id):
         post.title = form.title.data
         post.subtitle = form.subtitle.data
         post.content = form.content.data
+        post.tags = form.tags.data
         db.session.commit()
         flash("Post has been updated!", "success")
         return redirect(url_for('post', post_id=post.id))
@@ -112,6 +146,7 @@ def update_post(post_id):
         form.title.data = post.title
         form.subtitle.data = post.subtitle
         form.content.data = post.content
+        form.tags.data = post.tags
     return render_template('create.html', legend="Update Post", form=form)
 
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
@@ -124,6 +159,7 @@ def delete_post(post_id):
     db.session.commit()
     flash("Your post has been deleted!", "success")
     return redirect(url_for('index'))
+
 @app.route("/about")
 def about():
     return render_template('about.html')

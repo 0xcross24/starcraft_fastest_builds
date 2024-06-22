@@ -6,6 +6,13 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
+tags_table = db.Table(
+    'tags_association',
+    db.Column('post_id', db.ForeignKey('post.id'), primary_key=True),
+    db.Column('tag_id', db.ForeignKey('tag.id'), primary_key=True),
+)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True, nullable=False)
@@ -25,5 +32,17 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    tags = db.relationship(
+        'Tag',
+        secondary=tags_table,
+        backref=db.backref('post', lazy='dynamic'))
+
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Post('{self.title}', '{self.date_posted}', '{self.tags}')"
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+
+    def __repr__(self):
+        return f'Tag: {self.name}'

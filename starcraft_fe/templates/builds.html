@@ -1,0 +1,31 @@
+{% include 'level.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-4 mt-4">
+        {% for tag in beginner %}
+            <div class="post">
+                <h4>{{ tag }}</h4>
+                
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-4 mt-4">
+        {% for tag in intermediate %}
+            <div class="post">
+                <h4>{{ tag }}</h4>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-4 mt-4">
+        {% for tag in expert %}
+          <div class="card-body p-0"> 
+              <h1 class="card-text">{{ tag }}</h1>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

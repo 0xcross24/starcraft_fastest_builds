@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from starcraft_fe.models import User
 
@@ -54,5 +54,14 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
+    tags = SelectMultipleField('Tags', validators=[DataRequired()], choices=[
+        ('Zerg', 'Zerg'),
+        ('Terran', 'Terran'),
+        ('Protoss', 'Protoss'),
+        ('Beginner', 'Beginner'),
+        ('Intermediate', 'Intermediate'),
+        ('Expert', 'Expert'),
+    ])
     submit = SubmitField('Post')
 

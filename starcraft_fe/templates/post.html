@@ -6,8 +6,13 @@
     <div class="media-body">
       <h2>{{ post.title }}</h2>
       <p>{{ post.subtitle }}</p>
+      <p>
+        {% for tag in post.tags %}
+          <span>{{ tag.name }}</span>
+        {% endfor %}
+      </p>
       <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-      <p class="content">{{ post.content }}</p>
+      <p class="content">{{ post.content|safe }}</p>
       {% if post.author == current_user %}
       <div>
         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
@@ -33,6 +38,5 @@
     </div>
   </div>
 </div>
-
 
 {% endblock %}

@@ -1,31 +1,81 @@
-{% include 'level.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-
 <div class="row">
-    <div class="col-4 mt-4">
-        {% for tag in beginner %}
-            <div class="post">
-                <h4>{{ tag }}</h4>
-                
-            </div>
-        {% endfor %}
+    <div class="Header">
+        <h1 class="page-title">{{ title.races.capitalize() }} Build Orders</h1>
     </div>
-    <div class="col-4 mt-4">
-        {% for tag in intermediate %}
-            <div class="post">
-                <h4>{{ tag }}</h4>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="col-4 mt-4">
-        {% for tag in expert %}
-          <div class="card-body p-0"> 
-              <h1 class="card-text">{{ tag }}</h1>
-          </div>
-        {% endfor %}
-    </div>
-</div>
 
+    <div class="col-4 mt-4">
+      <div class="card">
+        <div class="card-title mt-2">
+          Beginner
+        </div>
+      </div>
+    </div>
+    <div class="col-4 mt-4">
+      <div class="card">
+        <div class="card-title mt-2">
+          Intermediate
+        </div>
+      </div>
+    </div>
+    <div class="col-4 mt-4">
+      <div class="card">
+        <div class="card-title mt-2">
+          Advanced
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 mt-4">
+        {% for post in posts %}   
+            {% if post.levels == 'beginner' %}
+            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+                <div class="card mb-4">
+                    <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
+                        <h1 class="card-title">{{ post.title }}</h1>
+                        <small class="subinfo">{{ post.author.username }}</small>
+                        <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <p class="card-text mt-3">{{ post.subtitle }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-4 mt-4">
+        {% for post in posts %}   
+            {% if post.levels == 'intermediate' %}
+            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+                <div class="card mb-4">
+                    <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
+                        <h1 class="card-title">{{ post.title }}</h1>
+                        <small class="subinfo">{{ post.author.username }}</small>
+                        <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <p class="card-text mt-3">{{ post.subtitle }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-4 mt-4">
+        {% for post in posts %}
+            {% if post.levels == 'expert' %}
+            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+                <div class="card mb-4">
+                    <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
+                        <h1 class="card-title">{{ post.title }}</h1>
+                        <small class="subinfo">{{ post.author.username }}</small>
+                        <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <p class="card-text mt-3">{{ post.subtitle }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div
+></div>
 {% endblock %}

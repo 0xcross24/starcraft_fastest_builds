@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="row">
-  <div class="Header">
-    <h1 class="page-title">Select Your Race</h1>
+  <div class="header">
+    <h1 class="page-title p-3">Select Your Race</h1>
   </div>
 
 <div class="col-4 column terran mt-4">
   <div class="inner card hover-card" data-hover-image="marine.gif" data-default-image="marine.jpg" id="terran-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='terran') }}" class="build-link mt-4">
+    <a href="{{ url_for('posts.race_posts', race_name='terran') }}" class="build-link">
+      <img src="{{ url_for('static', filename='marine.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
       <div class="card-body p-0">
-        <img src="{{ url_for('static', filename='marine.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
         <div class="p-3">
           <h1 class="index-title">Terran</h1>
         </div>
@@ -21,9 +21,9 @@
 
 <div class="col-4 column protoss mt-4">
   <div class="inner card hover-card" data-hover-image="zealot.gif" data-default-image="zealot.jpg" id="protoss-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='protoss') }}" class="build-link mt-4">
+    <a href="{{ url_for('posts.race_posts', race_name='protoss') }}" class="build-link">
+      <img src="{{ url_for('static', filename='zealot.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
       <div class="card-body p-0">
-        <img src="{{ url_for('static', filename='zealot.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
         <div class="p-3">
           <h1 class="index-title">Protoss</h1>
         </div>
@@ -34,9 +34,9 @@
 
 <div class="col-4 column zerg mt-4">
   <div class="inner card hover-card" data-hover-image="hydra.gif" data-default-image="hydra.jpg" id="zerg-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='zerg') }}" class="build-link mt-4">
+    <a href="{{ url_for('posts.race_posts', race_name='zerg') }}" class="build-link">
+      <img src="{{ url_for('static', filename='hydra.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
       <div class="card-body p-0">
-        <img src="{{ url_for('static', filename='hydra.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
         <div class="p-3">
           <h1 class="index-title">Zerg</h1>
         </div>

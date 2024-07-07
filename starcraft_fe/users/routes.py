@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, abort, Blu
 from flask_login import login_user, current_user, logout_user, login_required
 from starcraft_fe import db, bcrypt
 from starcraft_fe.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from starcraft_fe.users.utils import save_picture
 from starcraft_fe.models import User
 
 users = Blueprint('users', __name__)
@@ -23,7 +24,7 @@ def login():
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('users.login'))
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():

@@ -1,19 +1,32 @@
 body {
   background-color: #141414;
   color: #fff;
-  /*background-image: url("space2.jpg");*/
+
+}
+
+/*
+.container-fluid {
+  background-color: #141414;
+  color: #fff;
+  background-image: url("space3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-background-size: cover; /* Ensures compatibility with older browsers */
-  -moz-background-size: cover;    /* Ensures compatibility with older browsers */
-  -o-background-size: cover;      /* Ensures compatibility with older browsers */
-  image-rendering: -webkit-optimize-contrast; /* Chrome, Opera */
-  image-rendering: -moz-crisp-edges;          /* Firefox */
-  image-rendering: -o-crisp-edges;            /* Opera */
-  image-rendering: crisp-edges;               /* CSS3 spec */
-  image-rendering: pixelated;                 /* Modern browsers */
-  height: 100vh;
+  -webkit-background-size: cover; 
+  -moz-background-size: cover;    
+  -o-background-size: cover;   
+  image-rendering: -webkit-optimize-contrast; 
+  image-rendering: -moz-crisp-edges;          
+  image-rendering: -o-crisp-edges;            
+  image-rendering: crisp-edges;               
+  image-rendering: pixelated;                 
+  min-height: 100vh;
+  width: 100vw;
+}
+*/
+
+.container {
+  margin-top: 5em;
 }
 
 /* Modal */
@@ -48,7 +61,9 @@ body {
 
 .page-title {
   color: #fff;
+  background-color: #222222;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 
@@ -77,7 +92,13 @@ body {
 
 .card-text {
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: calc(1.6em * 2);
 }
 
 .index-title {
@@ -178,4 +199,9 @@ body {
 /* Build Actual Post page */
 .build-text {
   font-size: ;
+}
+
+#video {
+  width: 100%;
+  height: 50vh;
 }

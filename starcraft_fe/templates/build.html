@@ -2,16 +2,19 @@
 
 {% block content %}
 <div class="post-container">
-    <h1 class="build-title mb-0">{{ post.title| safe }}</h1>
-    <small class="subinfo">{{ post.author.username }}</small>
-    <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-    <h5 class="build-text my-2">{{ post.subtitle| safe }}</h5>
-    <p>{{ post.content| safe }}</p>
-    {% if post.author == current_user %}
-    <div>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', race_name=race_name, post_id=post.id) }}">Update</a>
-        <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-    </div>
+  <div class="container video-container p-0 mb-2">
+    <iframe id="video" src="https://www.youtube.com/embed/{{ post.youtube }}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h1 class="build-title mb-0">{{ post.title| safe }}</h1>
+  <small class="subinfo">{{ post.author.username }}</small>
+  <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+  <h5 class="build-text my-2">{{ post.subtitle| safe }}</h5>
+  <p>{{ post.content| safe }}</p>
+  {% if post.author == current_user %}
+  <div>
+      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', race_name=race_name, post_id=post.id) }}">Update</a>
+      <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+  </div>
     {% endif %}
 </div>
 

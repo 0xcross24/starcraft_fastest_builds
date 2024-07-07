@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, SelectMultipleField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -16,5 +16,6 @@ class PostForm(FlaskForm):
         ('Expert', 'Expert'),
     ])
     content = TextAreaField('Content', validators=[DataRequired()])
+    youtube = StringField('Youtube', validators=[Optional()])
     submit = SubmitField('Post')
 

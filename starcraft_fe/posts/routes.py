@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from starcraft_fe import db
+from starcraft_fe import db, cache
 from starcraft_fe.posts.forms import PostForm
 from starcraft_fe.models import Post
 
@@ -9,20 +9,24 @@ posts = Blueprint('posts', __name__)
 @posts.route("/build/new", methods=['GET', 'POST'])
 @login_required
 def create_post():
-    form = PostForm()
-    if form.validate_on_submit():
-        level_format = form.levels.data[0].lower()
-        race_format = form.races.data[0].lower()
-        post = Post(title=form.title.data, subtitle=form.subtitle.data, races=race_format, levels=level_format, content=form.content.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('main.index'))
+    if current_user.role != 'admin':
+        return redirect(url_for('main.error'))
     else:
-        print(form.errors)  # Print out form validation errors
-    return render_template('create.html', form=form, legend="New Post")
+        form = PostForm()
+        if form.validate_on_submit():
+            level_format = form.levels.data[0].lower()
+            race_format = form.races.data[0].lower()
+            post = Post(title=form.title.data, subtitle=form.subtitle.data, races=race_format, levels=level_format, content=form.content.data, youtube=form.youtube.data, author=current_user)
+            db.session.add(post)
+            db.session.commit()
+            flash('Your post has been created!', 'success')
+            return redirect(url_for('main.index'))
+        else:
+            print(form.errors)  # Print out form validation errors
+        return render_template('create.html', form=form, legend="New Post")
 
 @posts.route('/<string:race_name>', endpoint='race_posts')
+@cache.cached(timeout=50)
 def posts_by_race(race_name):
     race_name = race_name # /terran, /protoss, /zerg
     posts = Post.query.filter_by(races=race_name).all()
@@ -38,6 +42,7 @@ def posts_by_race(race_name):
         return redirect(url_for('main.error'))
 
 @posts.route('/<string:race_name>/<int:post_id>', endpoint='post')
+@cache.cached(timeout=50)
 def post(race_name, post_id):
     race_name = race_name
     post = Post.query.filter_by(races=race_name, id=post_id).first()
@@ -56,7 +61,7 @@ def update_post(race_name, post_id):
     validate = Post.query.filter_by(races=race_name, id=post_id).first()
 
     if post.author != current_user:
-        abort(403)
+        return redirect(url_for('main.error'))
 
     if not validate:
         return redirect(url_for('main.error'))
@@ -69,6 +74,7 @@ def update_post(race_name, post_id):
         post.races = form.races.data[0].lower()
         post.levels = form.levels.data[0].lower()
         post.content = form.content.data
+        post.youtube = form.youtube.data
 
         db.session.commit()
         race_name=post.races
@@ -78,15 +84,16 @@ def update_post(race_name, post_id):
     elif request.method == 'GET':
 
         level = []
-        level.postsend(post.levels.capitalize())
+        level.append(post.levels.capitalize())
         race = []
-        race.postsend(post.races.capitalize())
+        race.append(post.races.capitalize())
         
         form.title.data = post.title
         form.subtitle.data = post.subtitle
         form.races.data =  race
         form.levels.data = level
         form.content.data = post.content
+        form.youtube.data = post.youtube
 
 
     else:
@@ -107,7 +114,7 @@ def delete_post(race_name, post_id):
         return redirect(url_for('main.error'))
     
     if post.author != current_user:
-        abort(403)
+        return redirect(url_for('main.error'))
     db.session.delete(post)
     db.session.commit()
     flash("Your post has been deleted!", "success")

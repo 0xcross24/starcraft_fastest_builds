@@ -70,6 +70,20 @@
             </div>
 
             <div class="form-group mt-2">
+                {{ form.youtube.label(class="form-label") }}
+                {% if form.youtube.errors %}
+                    {{ form.youtube(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.youtube.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.youtube(class="form-control ckeditor")| safe }}
+                {% endif %}
+            </div>
+
+            <div class="form-group mt-2">
                 {{ form.content.label(class="form-label") }}
                 {% if form.content.errors %}
                     {{ form.content(class="form-control form-control-lg is-invalid") }}

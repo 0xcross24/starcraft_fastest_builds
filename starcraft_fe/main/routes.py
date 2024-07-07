@@ -9,7 +9,7 @@ def index():
 
 @main.route('/error')
 def error():
-    return render_template('404.html')
+    return render_template('error.html')
 
 
 @main.route("/about")

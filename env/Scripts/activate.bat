@@ -25,7 +25,13 @@ if defined _OLD_VIRTUAL_PATH set PATH=%_OLD_VIRTUAL_PATH%
 if not defined _OLD_VIRTUAL_PATH set _OLD_VIRTUAL_PATH=%PATH%
 
 set PATH=%VIRTUAL_ENV%\Scripts;%PATH%
-set VIRTUAL_ENV_PROMPT=(env) 
+set VIRTUAL_ENV_PROMPT=(env)
+
+REM Set custom environment variables
+set SECRET_KEY=13059654fc05573ad35f44a5e0b51d68
+set SQLALCHEMY_DATABASE_URI=sqlite:///build.db
+set EMAIL_USER=your_email_user
+set EMAIL_PASS=your_email_pass
 
 :END
 if defined _OLD_CODEPAGE (

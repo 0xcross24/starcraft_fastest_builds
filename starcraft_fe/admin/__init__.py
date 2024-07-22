@@ -5,7 +5,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user, login_required
 from flask import redirect, url_for, request
 from starcraft_fe import db
-from starcraft_fe.models import User, Post
+from starcraft_fe.models import Starcraft_User, Post
 
 class MyAdminIndexView(AdminIndexView):
     @expose('/')
@@ -24,6 +24,6 @@ class SecureModelView(ModelView):
 
 def init_admin(app):
     admin = Admin(app, name='Admin Dashboard', template_mode='bootstrap4', index_view=MyAdminIndexView())
-    admin.add_view(SecureModelView(User, db.session))
+    admin.add_view(SecureModelView(Starcraft_User, db.session))
     admin.add_view(SecureModelView(Post, db.session))
     return admin

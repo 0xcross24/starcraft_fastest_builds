@@ -13,12 +13,6 @@ from starcraft_fe.config import Config
 cache = Cache()
 mail = Mail()
 
-#app.config['SECRET_KEY'] = '13059654fc05573ad35f44a5e0b51d68'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///build.db'
-#app.config['CKEDITOR_PKG_TYPE'] = 'full-all'
-#app.config['allowedContent'] = True
-#app.config['CACHE_TYPE'] = 'simple'
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -26,13 +20,6 @@ login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 ckeditor = CKEditor()
 migrate = Migrate()
-
-#app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-#app.config['MAIL_PORT'] = 587
-#app.config['MAIL_USE_TLS'] = True
-#app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-#app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
-mail = Mail()
 
 
 def create_app(config_class=Config):

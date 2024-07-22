@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from starcraft_fe import db, bcrypt
 from starcraft_fe.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from starcraft_fe.users.utils import save_picture, send_reset_email
-from starcraft_fe.models import User
+from starcraft_fe.models import Starcraft_User
 
 users = Blueprint('users', __name__)
 
@@ -13,7 +13,7 @@ def login():
         return redirect(url_for("main.index"))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Starcraft_User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             return redirect(url_for('main.index'))
@@ -33,7 +33,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = Starcraft_User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash(f'Your account has been created!', 'success')
@@ -65,7 +65,7 @@ def reset_request():
         return redirect(url_for('main.home'))
     form = RequestResetForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Starcraft_User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash('An email has been sent with instructions to reset your password.', 'info')
         return redirect(url_for('users.login'))
@@ -76,7 +76,7 @@ def reset_request():
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    user = User.verify_reset_token(token)
+    user = Starcraft_User.verify_reset_token(token)
     if user is None:
         flash('That is an invalid or expired token', 'warning')
         return redirect(url_for('users.reset_request'))

@@ -3,7 +3,7 @@ from flask_admin import Admin, AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user, login_required
 from starcraft_fe import db, create_app
-from starcraft_fe.models import User, Post
+from starcraft_fe.models import Starcraft_User, Post
 
 admin_app = Blueprint('admin_app', __name__)
 
@@ -24,5 +24,5 @@ class SecureModelView(ModelView):
 
 # Initialize the Admin extension
 admin = Admin(create_app, name='Admin Dashboard', template_mode='bootstrap4', index_view=MyAdminIndexView())
-admin.add_view(SecureModelView(User, db.session))
+admin.add_view(SecureModelView(Starcraft_User, db.session))
 admin.add_view(SecureModelView(Post, db.session))

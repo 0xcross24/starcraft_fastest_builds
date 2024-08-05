@@ -16,7 +16,8 @@ def create_post():
         if form.validate_on_submit():
             level_format = form.levels.data[0].lower()
             race_format = form.races.data[0].lower()
-            post = Post(title=form.title.data, subtitle=form.subtitle.data, races=race_format, levels=level_format, content=form.content.data, youtube=form.youtube.data, author=current_user)
+            category_format = form.category.data[0].lower()
+            post = Post(title=form.title.data, subtitle=form.subtitle.data, races=race_format, levels=level_format, category=category_format, content=form.content.data, youtube=form.youtube.data, author=current_user)
             db.session.add(post)
             db.session.commit()
             flash('Your post has been created!', 'success')
@@ -25,11 +26,12 @@ def create_post():
             print(form.errors)  # Print out form validation errors
         return render_template('create.html', form=form, legend="New Post")
 
-@posts.route('/<string:race_name>', endpoint='race_posts')
+@posts.route('/<string:category>/<string:race_name>', endpoint='race_posts')
 @cache.cached(timeout=50)
-def posts_by_race(race_name):
+def posts_by_race(category, race_name):
     race_name = race_name # /terran, /protoss, /zerg
-    posts = Post.query.filter_by(races=race_name).all()
+    category = category
+    posts = Post.query.filter_by(races=race_name, category=category).all()
     title = Post.query.filter_by(races=race_name).first()
 
     if not posts:
@@ -37,24 +39,25 @@ def posts_by_race(race_name):
 
     if race_name in ['zerg', 'terran', 'protoss']:
 
-        return render_template('builds.html', posts=posts, race_name=race_name, title=title)
+        return render_template('builds.html', posts=posts, race_name=race_name, title=title, category=category)
     else:
         return redirect(url_for('main.error'))
 
-@posts.route('/<string:race_name>/<int:post_id>', endpoint='post')
+@posts.route('/<string:category>/<string:race_name>/<int:post_id>', endpoint='post')
 @cache.cached(timeout=50)
-def post(race_name, post_id):
+def post(category, race_name, post_id):
     race_name = race_name
-    post = Post.query.filter_by(races=race_name, id=post_id).first()
+    category = category
+    post = Post.query.filter_by(races=race_name, id=post_id, category=category).first()
 
     if not post:
         return redirect(url_for('main.error'))
     else:
-        return render_template('build.html', post=post, race_name=race_name)
+        return render_template('build.html', post=post, race_name=race_name, category=category)
 
-@posts.route("/<string:race_name>/<int:post_id>/update", methods=['GET', 'POST'])
+@posts.route("/<string:category>/<string:race_name>/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
-def update_post(race_name, post_id):
+def update_post(category, race_name, post_id):
     race_name = race_name.lower()
     post = Post.query.get_or_404(post_id)
 
@@ -80,7 +83,7 @@ def update_post(race_name, post_id):
         race_name=post.races
 
         flash("Post has been updated!", "success")
-        return redirect(url_for('posts.post', post_id=post.id, race_name=race_name))
+        return redirect(url_for('posts.post', post_id=post.id, race_name=race_name, category=category))
     elif request.method == 'GET':
 
         level = []
@@ -100,11 +103,11 @@ def update_post(race_name, post_id):
         print("Form Errors:", form.errors)  # Print out form validation errors
         print("Form Data:", form.data)    # Print out form data to inspect
 
-    return render_template('create.html', legend="Update Post", form=form, race_name=race_name, post=post)
+    return render_template('create.html', legend="Update Post", form=form, race_name=race_name, post=post, category=category)
 
-@posts.route("/<string:race_name>/<int:post_id>/delete", methods=['POST'])
+@posts.route("/<string:category>/<string:race_name>/<int:post_id>/delete", methods=['POST'])
 @login_required
-def delete_post(race_name, post_id):
+def delete_post(category, race_name, post_id):
     race_name = race_name.lower()
     post = Post.query.get_or_404(post_id)
 

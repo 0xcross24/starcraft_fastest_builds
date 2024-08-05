@@ -1,37 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="post-container">
-  <div class="container video-container p-0 mb-2">
-    <iframe id="video" src="https://www.youtube.com/embed/{{ post.youtube }}" frameborder="0" allowfullscreen></iframe>
+<div class="row hidden mt-4">
+  <div class="header">
+    <button class="back clicked">Go Back</button>
   </div>
-  <h1 class="build-title mb-0">{{ post.title| safe }}</h1>
-  <small class="subinfo">{{ post.author.username }}</small>
-  <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-  <h5 class="build-text my-2">{{ post.subtitle| safe }}</h5>
-  <p>{{ post.content| safe }}</p>
-  {% if post.author == current_user %}
-  <div>
-      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', race_name=race_name, post_id=post.id) }}">Update</a>
-      <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+  <div class="post-container category hidden">
+    <div class="container video-container p-0 mb-2">
+      <iframe id="video" src="https://www.youtube.com/embed/{{ post.youtube }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="container p-5">
+      <h1 class="build-title mb-0">{{ post.title| safe }}</h1>
+      <small class="subinfo">{{ post.author.username }}</small>
+      <small class="subinfo">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+      <h5 class="build-text my-2">{{ post.subtitle| safe }}</h5>
+      <p>{{ post.content| safe }}</p>
+      {% if post.author == current_user %}
+      <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', category=category, race_name=race_name, post_id=post.id) }}">Update</a>
+          <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+      </div>
+      {% endif %}
+    </div>
   </div>
-    {% endif %}
-</div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fs-5" id="deleteModalLabel">Delete Post?</h5>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <form action="{{ url_for('posts.delete_post', race_name=race_name, post_id=post.id) }}" method="POST">
-            <input class="btn btn-danger" type="submit" value="Delete">
-          </form>
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fs-5" id="deleteModalLabel">Delete Post?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <form action="{{ url_for('posts.delete_post', category=category, race_name=race_name, post_id=post.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
 </div>
 
 {% endblock %}

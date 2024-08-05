@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Starcraft Fastest Build Orders</title>
+    <!-- Add this to the head of your HTML file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {{ ckeditor.load() }}
+</head>
+<body>
+    <!-- Body Container -->
+    <div class="container-fluid bg p-5">
+        <div class="header">
+            <p class="m-0">STARCRAFT FASTEST BUILD ORDERS</p>
+            <h2>MAIN MENU</h2>
+        </div>
+        <div class="row content-container scrollUpContainer">
+            <div class="content col-12">
+                <div class="race">
+                    <ul class="race-list">
+                    <!-- Dropdown menu links -->
+                        <li class="race-list-items hovering-items"><a class="race-list-items-link py-2 pl-2" href="{{ url_for('main.category', category='1v1') }}">One vs One</a></li>
+                        <li class="race-list-items hovering-items"><a class="race-list-items-link py-2 pl-2" href="{{ url_for('main.category', category='3v3') }}">Three vs Three</a></li>
+                        <li class="race-list-items hovering-items"><a class="race-list-items-link py-2 pl-2" href="{{ url_for('main.category', category='in-house') }}">In-House Team Play</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row scrollDownContainer">
+            <div class="col-4 column overlay-container terran mt-4 hovering-items">
+                <div class="inner card hover-card" data-hover-image="marine.gif" data-default-image="marine.jpg" id="terran-hover">
+                  <a href="{{ url_for('posts.race_posts', category=category, race_name='terran') }}" class="build-link clicked">
+                    <img src="{{ url_for('static', filename='marine.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+                  </a>
+                </div>
+            </div>
+
+            <div class="col-4 column overlay-container protoss mt-4 hovering-items">
+                <div class="inner card hover-card" data-hover-image="zealot.gif" data-default-image="zealot.jpg" id="protoss-hover">
+                  <a href="{{ url_for('posts.race_posts', category=category, race_name='protoss') }}" class="build-link clicked">
+                    <img src="{{ url_for('static', filename='zealot.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+                  </a>
+                </div>
+            </div>
+
+            <div class="col-4 column overlay-container zerg mt-4 hovering-items">
+                <div class="inner card hover-card" data-hover-image="hydra.gif" data-default-image="hydra.jpg" id="zerg-hover">
+                  <a href="{{ url_for('posts.race_posts', category=category, race_name='zerg') }}" class="build-link clicked">
+                    <img src="{{ url_for('static', filename='hydra.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
+                  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="enter" preload="auto">
+        <source src="{{ url_for('static', filename='audio/mouseover1.wav') }}" type="audio/wav">
+        <!-- <source src="{{ url_for('static', filename='audio/swishin.wav') }}"> -->
+        Your browser does not support the audio tag.
+    </audio> 
+    <audio id="click" preload="auto">
+        <source src="{{ url_for('static', filename='audio/mousedown1.wav') }}" type="audio/wav">
+        Your browser does not support the audio tag.
+    </audio>
+    <audio id="swishout" preload="auto">
+        <source src="{{ url_for('static', filename='audio/swishout.wav') }}" type="audio/wav">
+        Your browser does not support the audio tag.
+    </audio> 
+    <audio id="swishin" preload="auto">
+        <source src="{{ url_for('static', filename='audio/swishin.wav') }}" type="audio/wav">
+        Your browser does not support the audio tag.
+    </audio> 
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-+z7JrJ5xj8dD8t7+P4GFaz23O2zL2mfT5F9DZm+FM8MfHvsS9prTe8Wy0me6PTFj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+</body>
+</html>

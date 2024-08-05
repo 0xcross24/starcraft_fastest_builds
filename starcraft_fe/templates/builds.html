@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="header">
-        <h1 class="page-title p-3">{{ title.races.capitalize() }} Guides</h1>
-    </div>
+<div class="row hidden mt-4">
+  <div class="header">
+    <button class="back clicked">Go Back</button>
+    <!--<h1 class="page-title p-2">Select Your Race</h1>-->
+  </div>
 
     <div class="col-4 mt-4">
       <div class="card">
@@ -29,10 +30,10 @@
       </div>
     </div>
 
-    <div class="col-4 mt-4">
+    <div class="col-4 mt-4 hovering-items">
         {% for post in posts %}   
             {% if post.levels == 'beginner' %}
-            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+            <a href="{{ url_for('posts.post', category=category, race_name=race_name, post_id=post.id) }}" class="card-link clicked">
                 <div class="card mb-4">
                     <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
                         <h1 class="card-title">{{ post.title }}</h1>
@@ -45,10 +46,10 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div class="col-4 mt-4">
+    <div class="col-4 mt-4 hovering-items">
         {% for post in posts %}   
             {% if post.levels == 'intermediate' %}
-            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+            <a href="{{ url_for('posts.post', category=category, race_name=race_name, post_id=post.id) }}" class="card-link clicked">
                 <div class="card mb-4">
                     <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
                         <h1 class="card-title">{{ post.title }}</h1>
@@ -61,10 +62,10 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div class="col-4 mt-4">
+    <div class="col-4 mt-4 hovering-items">
         {% for post in posts %}
             {% if post.levels == 'expert' %}
-            <a href="{{ url_for('posts.post', race_name=race_name, post_id=post.id) }}" class="card-link">
+            <a href="{{ url_for('posts.post', category=category, race_name=race_name, post_id=post.id) }}" class="card-link clicked">
                 <div class="card mb-4">
                     <div class="card-body {% if race_name == 'zerg' %}card-body-zerg{% elif race_name == 'terran' %}card-body-terran{% elif race_name == 'protoss' %}card-body-protoss{% endif %}">
                         <h1 class="card-title">{{ post.title }}</h1>

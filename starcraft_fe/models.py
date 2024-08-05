@@ -47,6 +47,7 @@ class Post(db.Model):
     subtitle = db.Column(db.String(64), nullable=False)
     levels = db.Column(db.String(50), nullable=False) 
     youtube = db.Column(db.String(200), nullable=True)
+    category = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}', '{self.races}', '{self.levels}')"
+        return f"Post('{self.title}', '{self.date_posted}', '{self.races}', '{self.levels}', '{self.category}')"

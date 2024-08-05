@@ -15,7 +15,11 @@ class PostForm(FlaskForm):
         ('Intermediate', 'Intermediate'),
         ('Expert', 'Expert'),
     ])
+    category = SelectMultipleField('Categories', validators=[DataRequired()], choices=[
+        ('1v1', '1v1'),
+        ('3v3', '3v3'),
+        ('In-House', 'In-House'),
+    ])
     content = TextAreaField('Content', validators=[DataRequired()])
     youtube = StringField('Youtube', validators=[Optional()])
     submit = SubmitField('Post')
-

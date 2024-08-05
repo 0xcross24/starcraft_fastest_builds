@@ -1,8 +1,8 @@
-"""Postgresql migration
+"""New database
 
-Revision ID: 65f9cc74d57e
+Revision ID: 91c9689d1197
 Revises: 
-Create Date: 2024-07-21 23:11:40.016732
+Create Date: 2024-08-02 14:05:10.848895
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '65f9cc74d57e'
+revision = '91c9689d1197'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,12 +33,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('subtitle', sa.String(length=64), nullable=False),
-    sa.Column('races', sa.PickleType(), nullable=False),
+    sa.Column('races', sa.String(length=50), nullable=False),
     sa.Column('date_posted', sa.DateTime(), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('levels', sa.PickleType(), nullable=False),
+    sa.Column('levels', sa.String(length=50), nullable=False),
     sa.Column('youtube', sa.String(length=200), nullable=True),
+    sa.Column('category', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['starcraft_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

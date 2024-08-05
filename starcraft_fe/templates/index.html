@@ -1,47 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-  <div class="header">
-    <h1 class="page-title p-3">Select Your Race</h1>
+
+<div class="row hidden mt-4">
+  <div class="col-4 column overlay-container hovering-items">
+    <div class="inner card glow-border">
+      <a href="{{ url_for('main.category', category='1v1') }}" class="build-link clicked">
+        <img src="{{ url_for('static', filename='single.jpg') }}" class="img-cover category img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="card-body p-0 overlay">
+          <div class="p-3">
+            <h1 class="index-title">1v1 Builds</h1>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 
-<div class="col-4 column terran mt-4">
-  <div class="inner card hover-card" data-hover-image="marine.gif" data-default-image="marine.jpg" id="terran-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='terran') }}" class="build-link">
-      <img src="{{ url_for('static', filename='marine.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
-      <div class="card-body p-0">
-        <div class="p-3">
-          <h1 class="index-title">Terran</h1>
+  <div class="col-4 column overlay-container hovering-items">
+    <div class="inner card glow-border">
+      <a href="{{ url_for('main.category', category='3v3') }}" class="build-link clicked">
+        <img src="{{ url_for('static', filename='multi.jpg') }}" class="img-cover category img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="card-body p-0 overlay">
+          <div class="p-3">
+            <h1 class="index-title">3v3 Builds</h1>
+          </div>
+        </div>      
+      </a>
+    </div>
+  </div>
+
+  <div class="col-4 column overlay-container hovering-items">
+    <div class="inner card glow-border">
+      <a href="{{ url_for('main.category', category='in-house') }}" class="build-link clicked">
+        <img src="{{ url_for('static', filename='inny.jpg') }}" class="img-cover category img-fluid img-full me-2 mr-2 align-bottom hover-image">
+        <div class="card-body p-0 overlay">
+          <div class="p-3">
+            <h1 class="index-title">In-House Clan Builds</h1>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>
 
-<div class="col-4 column protoss mt-4">
-  <div class="inner card hover-card" data-hover-image="zealot.gif" data-default-image="zealot.jpg" id="protoss-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='protoss') }}" class="build-link">
-      <img src="{{ url_for('static', filename='zealot.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
-      <div class="card-body p-0">
-        <div class="p-3">
-          <h1 class="index-title">Protoss</h1>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<div class="col-4 column zerg mt-4">
-  <div class="inner card hover-card" data-hover-image="hydra.gif" data-default-image="hydra.jpg" id="zerg-hover">
-    <a href="{{ url_for('posts.race_posts', race_name='zerg') }}" class="build-link">
-      <img src="{{ url_for('static', filename='hydra.jpg') }}" class="img-cover img-fluid img-full me-2 mr-2 align-bottom hover-image">
-      <div class="card-body p-0">
-        <div class="p-3">
-          <h1 class="index-title">Zerg</h1>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
 {% endblock %}
